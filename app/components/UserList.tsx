@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
-import { ActivityIndicator, Card } from "react-native-paper";
+import { ActivityIndicator, Card, TextInput } from "react-native-paper";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,14 +15,15 @@ const UserList = () => {
 
   const [pageLoading, setPageLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [filterCountry, setFilterCountry] = useState("");
 
   const endCallback = () => {
     setPageLoading(false);
   };
 
   useEffect(() => {
-    dispatch(getUsers(page, PAGE_SIZE, endCallback));
-  }, [page]);
+    dispatch(getUsers(page, PAGE_SIZE, filterCountry, endCallback));
+  }, [page, filterCountry]);
 
   if (pageLoading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -30,6 +31,16 @@ const UserList = () => {
 
   return (
     <View style={{ padding: 16 }}>
+      <TextInput
+        label="Filter by Country"
+        value={filterCountry}
+        onChangeText={(text) => {
+          setPage(1);
+          setFilterCountry(text);
+        }}
+        style={{ marginBottom: 10 }}
+      />
+
       <FlatList
         data={users}
         keyExtractor={(item) => item.id}

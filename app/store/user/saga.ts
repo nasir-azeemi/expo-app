@@ -10,6 +10,7 @@ interface IGetUsersAction extends Action {
   payload: {
     page: number;
     limit: number;
+    filterCountry?: string;
     onEnd?: () => void;
     onSuccess?: () => void;
     onError?: () => void;
@@ -17,19 +18,25 @@ interface IGetUsersAction extends Action {
 }
 
 // API call functions
-const getUsersFromApi = async (page: number, limit: number) => {
+const getUsersFromApi = async (
+  page: number,
+  limit: number,
+  filterCountry?: string
+) => {
   return get(`/users`, {
     params: {
       page,
       limit,
+      ...(filterCountry && { country: filterCountry }),
     },
   });
 };
 
 function* getUser(action: IGetUsersAction): Generator<any, void, any> {
-  const { page, limit, onEnd, onSuccess, onError } = action.payload;
+  const { page, limit, filterCountry, onEnd, onSuccess, onError } =
+    action.payload;
   try {
-    const response = yield call(getUsersFromApi, page, limit);
+    const response = yield call(getUsersFromApi, page, limit, filterCountry);
 
     const append = page > 1;
 

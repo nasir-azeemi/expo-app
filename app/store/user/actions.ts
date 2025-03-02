@@ -5,6 +5,7 @@ import { VoidFuncType } from "@typings/common.types";
 export const getUsers = (
   page: number,
   limit: number,
+  filterCountry?: string,
   onEnd?: VoidFuncType,
   onSuccess?: VoidFuncType,
   onError?: VoidFuncType
@@ -14,6 +15,7 @@ export const getUsers = (
     payload: {
       page,
       limit,
+      filterCountry,
       onEnd,
       onSuccess,
       onError,
