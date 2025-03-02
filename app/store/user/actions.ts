@@ -3,6 +3,8 @@ import { GET_USERS, SET_USERS } from "./actionTypes";
 import { VoidFuncType } from "@typings/common.types";
 
 export const getUsers = (
+  page: number,
+  limit: number,
   onEnd?: VoidFuncType,
   onSuccess?: VoidFuncType,
   onError?: VoidFuncType
@@ -10,6 +12,8 @@ export const getUsers = (
   return {
     type: GET_USERS,
     payload: {
+      page,
+      limit,
       onEnd,
       onSuccess,
       onError,
@@ -19,12 +23,13 @@ export const getUsers = (
 
 export const setUsers = (
   users: IUser[],
+  append: boolean,
   onEnd?: VoidFuncType,
   onSuccess?: VoidFuncType,
   onError?: VoidFuncType
 ) => {
   return {
     type: SET_USERS,
-    payload: { users, onEnd, onSuccess, onError },
+    payload: { users, append, onEnd, onSuccess, onError },
   };
 };

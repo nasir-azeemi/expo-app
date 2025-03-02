@@ -7,19 +7,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store/index";
 import { getUsers } from "@store/user/actions";
 
+const PAGE_SIZE = 20;
+
 const UserList = () => {
   const dispatch = useDispatch();
   const { users } = useSelector((state: RootState) => state.User);
 
   const [pageLoading, setPageLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   const endCallback = () => {
     setPageLoading(false);
   };
 
   useEffect(() => {
-    dispatch(getUsers(endCallback));
-  }, []);
+    dispatch(getUsers(page, PAGE_SIZE, endCallback));
+  }, [page]);
 
   if (pageLoading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -37,6 +40,10 @@ const UserList = () => {
             <Text>{new Date(item.createdAt).toLocaleDateString()}</Text>
           </Card>
         )}
+        onEndReached={() => {
+          setPage(page + 1);
+        }}
+        onEndReachedThreshold={1.5}
       />
     </View>
   );

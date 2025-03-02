@@ -8,6 +8,8 @@ import { GET_USERS } from "./actionTypes";
 
 interface IGetUsersAction extends Action {
   payload: {
+    page: number;
+    limit: number;
     onEnd?: () => void;
     onSuccess?: () => void;
     onError?: () => void;
@@ -15,16 +17,23 @@ interface IGetUsersAction extends Action {
 }
 
 // API call functions
-const getUsersFromApi = async () => {
-  return get(`/users`);
+const getUsersFromApi = async (page: number, limit: number) => {
+  return get(`/users`, {
+    params: {
+      page,
+      limit,
+    },
+  });
 };
 
 function* getUser(action: IGetUsersAction): Generator<any, void, any> {
-  const { onEnd, onSuccess, onError } = action.payload;
+  const { page, limit, onEnd, onSuccess, onError } = action.payload;
   try {
-    const response = yield call(getUsersFromApi);
+    const response = yield call(getUsersFromApi, page, limit);
 
-    yield put(setUsers(response));
+    const append = page > 1;
+
+    yield put(setUsers(response, append));
 
     onSuccess?.();
   } catch (error: any) {

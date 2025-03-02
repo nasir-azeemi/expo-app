@@ -11,7 +11,9 @@ const userReducer = (state = initialState, action: AnyAction) => {
     case SET_USERS:
       return {
         ...state,
-        users: action.payload.users,
+        users: action.payload.append
+          ? [...state.users, ...action.payload.users]
+          : action.payload.users,
       };
 
     default:
