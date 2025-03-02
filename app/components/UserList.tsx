@@ -3,10 +3,9 @@ import { View, Text, FlatList } from "react-native";
 import { ActivityIndicator, Button, Card, TextInput } from "react-native-paper";
 
 import { useDispatch, useSelector } from "react-redux";
-
-import { RootState } from "@store/index";
-import { getUsers } from "@store/user/actions";
-import { SortOrder } from "@typings/common.types";
+import { RootState } from "../store";
+import { SortOrder } from "../typings/common.types";
+import { getUsers } from "../store/user/actions";
 
 const PAGE_SIZE = 20;
 

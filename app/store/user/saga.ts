@@ -1,11 +1,11 @@
 import { Action } from "redux";
 import { call, put, takeLatest } from "redux-saga/effects";
 
-import { get } from "@utils/api.util";
-import { setError } from "@store/common/actions";
 import { setUsers } from "./actions";
 import { GET_USERS } from "./actionTypes";
-import { SortOrder } from "@typings/common.types";
+import { SortOrder } from "../../typings/common.types";
+import { get } from "../../utils/api.util";
+import { setError } from "../common/actions";
 
 interface IGetUsersAction extends Action {
   payload: {

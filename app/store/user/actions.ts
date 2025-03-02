@@ -1,6 +1,6 @@
-import { IUser } from "@typings/user.types";
+import { SortOrder, VoidFuncType } from "../../typings/common.types";
+import { IUser } from "../../typings/user.types";
 import { GET_USERS, SET_USERS } from "./actionTypes";
-import { SortOrder, VoidFuncType } from "@typings/common.types";
 
 export const getUsers = (
   page: number,
