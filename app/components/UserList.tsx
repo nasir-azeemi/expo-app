@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
-import { ActivityIndicator, Card, TextInput } from "react-native-paper";
+import { ActivityIndicator, Button, Card, TextInput } from "react-native-paper";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "@store/index";
 import { getUsers } from "@store/user/actions";
+import { SortOrder } from "@typings/common.types";
 
 const PAGE_SIZE = 20;
 
@@ -15,6 +16,7 @@ const UserList = () => {
 
   const [pageLoading, setPageLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
   const [filterCountry, setFilterCountry] = useState("");
 
   const endCallback = () => {
@@ -22,8 +24,8 @@ const UserList = () => {
   };
 
   useEffect(() => {
-    dispatch(getUsers(page, PAGE_SIZE, filterCountry, endCallback));
-  }, [page, filterCountry]);
+    dispatch(getUsers(page, PAGE_SIZE, sortOrder, filterCountry, endCallback));
+  }, [page, sortOrder, filterCountry]);
 
   if (pageLoading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -40,6 +42,19 @@ const UserList = () => {
         }}
         style={{ marginBottom: 10 }}
       />
+
+      <Button
+        mode="contained"
+        onPress={() => {
+          setPage(1);
+          setSortOrder(
+            sortOrder === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC
+          );
+        }}
+      >
+        Sorted By:{" "}
+        {sortOrder === SortOrder.DESC ? "Newest First" : "Oldest First"}
+      </Button>
 
       <FlatList
         data={users}

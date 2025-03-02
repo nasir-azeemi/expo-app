@@ -1,10 +1,11 @@
 import { IUser } from "@typings/user.types";
 import { GET_USERS, SET_USERS } from "./actionTypes";
-import { VoidFuncType } from "@typings/common.types";
+import { SortOrder, VoidFuncType } from "@typings/common.types";
 
 export const getUsers = (
   page: number,
   limit: number,
+  sortOrder: SortOrder,
   filterCountry?: string,
   onEnd?: VoidFuncType,
   onSuccess?: VoidFuncType,
@@ -15,6 +16,7 @@ export const getUsers = (
     payload: {
       page,
       limit,
+      sortOrder,
       filterCountry,
       onEnd,
       onSuccess,
