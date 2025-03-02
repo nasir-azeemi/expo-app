@@ -1,6 +1,6 @@
-# Welcome to your Expo app 👋
+# Welcome 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is an example expo app created for a take home assignment.
 
 ## Get started
 
@@ -16,35 +16,24 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
     npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+Kindly test the app in android or ios. It has some issues with scrolling on web.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## UI
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+The interface consists of a scrollable list. As you scroll more users will be fetched from the BE and displayed in the list.
 
-## Get a fresh project
+You can use the Filter by Country to fetch filtered users based on the input.
 
-When you're ready, run:
+You can use the Sort By toggle button to either sort the list in ascending or descending order. By default the data is fetched in ascending order.
 
-```bash
-npm run reset-project
-```
+## Assumptions
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+The user count is in millions on production. Hence end of the list will never be reached by scrolling.
 
-## Learn more
+## Challenges
 
-To learn more about developing your project with Expo, look at the following resources:
+To get scrolling to work on mobile and web.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Time
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Took approx 1.5 hours
