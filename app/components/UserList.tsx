@@ -1,24 +1,29 @@
-import { IUser } from "@typings/user.types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, FlatList } from "react-native";
+import { ActivityIndicator, Card } from "react-native-paper";
 
-import { Card } from "react-native-paper";
+import { useDispatch, useSelector } from "react-redux";
+
+import { RootState } from "@store/index";
+import { getUsers } from "@store/user/actions";
 
 const UserList = () => {
-  const users: IUser[] = [
-    {
-      createdAt: "2025-01-30T01:35:24.900Z",
-      userName: "Meta.Boyer",
-      country: "CM",
-      id: "1",
-    },
-    {
-      createdAt: "2025-01-29T20:44:09.561Z",
-      userName: "London.Stehr43",
-      country: "NG",
-      id: "2",
-    },
-  ];
+  const dispatch = useDispatch();
+  const { users } = useSelector((state: RootState) => state.User);
+
+  const [pageLoading, setPageLoading] = useState(true);
+
+  const endCallback = () => {
+    setPageLoading(false);
+  };
+
+  useEffect(() => {
+    dispatch(getUsers(endCallback));
+  }, []);
+
+  if (pageLoading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
 
   return (
     <View style={{ padding: 16 }}>
